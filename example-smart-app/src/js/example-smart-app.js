@@ -7,6 +7,13 @@
       ret.reject();
     }
 
+    function getStringValue(arrayObject, separator) {
+      if (Array.isArray(arrayObject))
+        return arrayObject.join(separator);
+
+      return arrayObject;
+    }
+
     function onReady(smart) {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
@@ -33,8 +40,8 @@
           var lname = '';
 
           if (typeof patient.name[0] !== 'undefined') {
-            fname = patient.name[0].given.join(' ');
-            lname = patient.name[0].family;
+            fname = getStringValue(patient.name[0].given, ' ');
+            lname = getStringValue(patient.name[0].family, ' ');
           }
 
           var height = byCodes('8302-2');
